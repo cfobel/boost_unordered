@@ -2,9 +2,11 @@
 #include <iostream>
 
 #include <boost/unordered_map.hpp>
+#include <boost/unordered_set.hpp>
 #include <boost/foreach.hpp>
 
 typedef boost::unordered_map<std::string, int> AgeTable;
+typedef boost::unordered_set<int> AgeSet;
 
 int main() {
     AgeTable ages;
@@ -24,4 +26,18 @@ int main() {
         std::cout << "  " << data.first << " is " << data.second << std::endl;
     }
     std::cout << std::endl;
+
+    AgeSet age_set;
+    BOOST_FOREACH(AgeTable::value_type &data, ages) {
+        age_set.insert(data.second);
+    }
+
+    std::cout << "Contents of unorder age set:" << std::endl;
+    BOOST_FOREACH(AgeSet::value_type data, age_set) {
+        std::cout << "  " << data << std::endl;
+    }
+    std::cout << std::endl;
+
+
+    return 0;
 }
